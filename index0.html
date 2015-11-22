@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock's demos of React</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="Rock"></div>
+    <script type="text/babel">
+      ReactDOM.render(
+        <h1>Hello, world!</h1>,
+        document.getElementById('Rock')
+      );
+    </script>
+
+    <div id="fuck"></div>
+    <script type="text/babel">
+      var names = ['Alice', 'Emily', 'Kate'];
+      ReactDOM.render(
+        <div>
+        {
+          names.map(function (name) {
+            return <div>Hello, {name}!</div>
+          })
+        }
+        </div>,
+        document.getElementById('fuck')
+      );
+    </script>
+
+    <div id="example0"></div>
+    <script type="text/babel">
+      var arr = [
+        <h1>Hello world!</h1>,
+        <h2>React is awesome</h2>,
+      ];
+      ReactDOM.render(
+        <div>{arr}</div>,
+        document.getElementById('example0')
+      );
+    </script>
+    <div id="example1"></div>
+    <script type="text/babel">
+      var HelloMessage = React.createClass({
+        render: function() {
+          return <h1>Hello {this.props.name}, {this.props.className }, for {this.props.htmlFor }</h1>;
+        }
+      });
+
+      ReactDOM.render(
+        <HelloMessage name="John" className="32" htmlFor="fun" />,
+        document.getElementById('example1')
+      );
+    </script>
+  </body>
+</html>

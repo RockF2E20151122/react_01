@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock's demos of React</title>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="dom1"></div>
+    <script type="text/babel">
+      var NotesList = React.createClass({
+        propTypes: {
+          title: React.PropTypes.string.isRequired,
+        },
+        
+        getDefaultProps : function () {
+          return {
+            title : 'Hello World'
+          };
+        },
+        
+        render: function() {
+          /*return (
+            <ol>
+            {
+              this.props.children.map(function (child) {
+                return <li>{child}</li>
+              })
+            }
+            </ol>
+          );*/
+
+          return <h2> this is the h2 {this.props.title }</h2>          
+        }
+      });
+
+      var data=32;
+
+      ReactDOM.render(
+        //<NotesList title="title here">
+        <NotesList >
+          <span>hello</span>
+          <span>world</span>
+        </NotesList>,
+        document.getElementById('dom1')
+      );
+    </script>
+
+    <div id="dom2"></div>
+    <script type="text/babel">
+      var MyComponent = React.createClass({
+        handleClick: function() {
+          ReactDOM.findDOMNode(this.refs.myTextInput).focus();
+        },
+        render: function() {
+          return (
+            <div>
+              <input type="text" ref="myTextInput" />
+              <input type="button" value="Focus the text input" onClick={this.handleClick} />
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <MyComponent />,
+        document.getElementById('dom2')
+      );
+    </script>
+
+    <div id="dom3"></div>
+    <script type="text/babel">
+      var LikeButton = React.createClass({
+        getInitialState: function() {
+          return {liked: false};
+        },
+        handleClick: function(event) {
+          this.setState({liked: !this.state.liked});
+        },
+        render: function() {
+          var text = this.state.liked ? 'like' : 'haven\'t liked';
+          return (
+            <p onClick={this.handleClick}>
+              You {text} this. Click to toggle.
+            </p>
+          );
+        }
+      });
+
+      //由于 this.props 和 this.state 都用于描述组件的特性，可能会产生混淆。
+      //一个简单的区分方法是，this.props 表示那些一旦定义，就不再改变的特性，而 this.state 是会随着用户互动而产生变化的特性。
+
+      ReactDOM.render(
+        <LikeButton />,
+        document.getElementById('dom3')
+      );
+    </script>
+
+    <div class="dom4"></div>
+    <script type="text/babel">
+      
+      var Input = React.createClass({
+        getInitialState: function() {
+          return {value: 'Hello!'};
+        },
+        handleChange: function(event) {
+          this.setState({value: event.target.value});
+        },
+        render: function () {
+          var value = this.state.value;
+          return (
+            <div>
+              <input type="text" value={value} onChange={this.handleChange} />
+              <p>{value}</p>
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(<Input />, document.getElementById('dom4') );
+
+    </script>
+  </body>
+</html>
